@@ -2,9 +2,11 @@ filebeat.prospectors:
 - input_type: log
   paths:
     - /containers/5*/*.log
-  # json:
-    # keys_under_root: true
-    # add_error_key: true
+  include_lines: ${INCLUDE}
+  exclude_lines: ${EXCLUDE}
+  json:
+    keys_under_root: false
+    add_error_key: true
   tail_files: true
   fields:
     test_field: ${SEND_IP}
