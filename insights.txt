@@ -1,0 +1,4 @@
+hostname from config
+image form config
+name form generic
+id from generic
