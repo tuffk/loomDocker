@@ -9,11 +9,10 @@ filebeat.prospectors:
   ignore_older: ${IGNORE_OLDER}
   encoding: ${ENCODING}
   json:
-    keys_under_root: false
+    keys_under_root: true
     add_error_key: true
+    message_key: log
   tail_files: true
-  fields:
-    test_field: ${SEND_IP}
 
 filebeat.config.prospectors:
   path: /usr/share/filebeat/filebeat.yml
