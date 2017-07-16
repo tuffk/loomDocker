@@ -8,8 +8,6 @@ filebeat.prospectors:
   tail_files: true
   fields:
     test_field: ${SEND_IP}
-  # TODO: add cron that resets env variables for udpating the file or
-  #   that rewrites the file with the new parameters
 
 filebeat.config.prospectors:
   path: /usr/share/filebeat/filebeat.yml
