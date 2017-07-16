@@ -21,3 +21,6 @@ docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged 
 * `TAGS` - [tags](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_tags "tags") default is none
 * `IGNORE_OLDER` - [ignore older](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#ignore-older "ignore older")  default is 0
 * `ENCODING` - [encoding](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_encoding "encoding") default is 'plain'
+
+#### additional notes
+this was tested on a Linux Mint Serena 
