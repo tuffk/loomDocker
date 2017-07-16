@@ -14,10 +14,17 @@ ENV EXCLUDE=[] \
 
 # add the filebeat yml to the container
 COPY ./filebeat.yml /usr/share/filebeat/filebeat.yml
+COPY  ./jsoner.py jsoner.py
 
 USER root
 #get loom certificate
 RUN mkdir /usr/share/loom \
+  && echo "filebeat -e &" >> run.sh \
+  && echo "while true" >> run.sh \
+  && echo "do" >> run.sh \
+  && echo "python jsoner.py" >> run.sh \
+  && echo "sleep 5" >> run.sh \
+  && echo "done" >> run.sh \
   && curl -o /usr/share/loom/loom.pem https://static.loomsystems.com/loom.cer \
   && chmod 755 /usr/share/loom/loom.pem \
   && yum install -y openssl \
@@ -27,3 +34,5 @@ RUN mkdir /usr/share/loom \
   && openssl x509 -req -days 3650 -in selfsigned.csr -signkey selfsigned.key -out selfsigned.crt \
   && rm selfsigned.csr \
   && yum remove -y openssl
+
+CMD ["/bin/sh","/usr/share/filebeat/run.sh"]

@@ -1,13 +1,14 @@
 import sys, json, os
-kuz = open("pito.txt","w")
+kuz = open("/usr/share/filebeat/filebeat.yml","w")
 kuz.write("filebeat.prospectors:\n")
-# files = os.listdir("/containers")
-PATH = "/var/lib/docker/containers"
+PATH = "/containers"
+# PATH = "/var/lib/docker/containers"
 files = os.listdir(PATH)
 dat =[]
 for f in files:
     json_file = open(PATH+"/"+f+"/config.v2.json")
     temp = json.load(json_file)
+    json_file.close()
     kuz.write("- input_type: log\n")
     kuz.write("  paths:\n")
     kuz.write("    - "+PATH+"/"+f+"/*.log\n")
