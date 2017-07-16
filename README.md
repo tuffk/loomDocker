@@ -1,5 +1,5 @@
 # Loom Docker Litener
-Docekr Container to monitor other containers logs and send them to Loom.
+Docker Container to monitor other containers logs and send them to Loom.
 
 This container uses [Filebeat docker](https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html "File Beat")
 base image (5.5.0)
@@ -12,7 +12,7 @@ docker build -t <name> .
 docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged -v /var/lib/docker/containers:/containers:ro <name>
 ```
 * `-v /var/lib/docker/containers:/containers:ro` this allows the docker to read the other containers logs
-* `CUSTOMER_NAME` must be setted for the container to send the logs to Loom
+* `CUSTOMER_NAME` must be set for the container to send the logs to Loom
 
 #### supported configurations for Filebeat with env variables. [Official Filebeat Documentation](https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html "Configuring Filebeat")
 * `EXCLUDE` - [exclude lines](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#exclude-lines "exclude lines")
