@@ -3,7 +3,11 @@
 FROM docker.elastic.co/beats/filebeat:5.5.0
 
 ENV EXCLUDE=[] \
-  INCLUDE=[]
+  INCLUDE=[] \
+  EXCLUDE_FILES=[] \
+  TAGS=[] \
+  IGNORE_OLDER=0 \
+  ENCODING="plain"
 
 ### TODO: if you copy the file in the Dockerfile, you will have to rebuild every time you change the configuration. Instead, mount a volume where you expect the config file, and copy it using a docker entrypoint script.
 ### Regardless, make sure this is the last step, because the config file will change more frequently than the certificate

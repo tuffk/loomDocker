@@ -4,6 +4,10 @@ filebeat.prospectors:
     - /containers/5*/*.log
   include_lines: ${INCLUDE}
   exclude_lines: ${EXCLUDE}
+  exclude_files: ${EXCLUDE_FILES}
+  tags: ${TAGS}
+  ignore_older: ${IGNORE_OLDER}
+  encoding: ${ENCODING}
   json:
     keys_under_root: false
     add_error_key: true
