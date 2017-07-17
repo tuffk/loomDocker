@@ -9,15 +9,11 @@ ENV EXCLUDE=[] \
   IGNORE_OLDER=0 \
   ENCODING="plain"
 
-### TODO: if you copy the file in the Dockerfile, you will have to rebuild every time you change the configuration. Instead, mount a volume where you expect the config file, and copy it using a docker entrypoint script.
-### Regardless, make sure this is the last step, because the config file will change more frequently than the certificate
-
-# add the filebeat yml to the container
-# COPY ./filebeat.yml /usr/share/filebeat/filebeat.yml
+# add the script that generates the filebeat.yml dyanmically to the docker
 COPY  ./jsoner.py jsoner.py
 
 USER root
-#get loom certificate
+#get loom certificate & create init script
 RUN mkdir /usr/share/loom \
   && echo "python jsoner.py" >> run.sh \
   && echo "filebeat -e &" >> run.sh \
@@ -36,4 +32,4 @@ RUN mkdir /usr/share/loom \
   && rm selfsigned.csr \
   && yum remove -y openssl
 
-CMD ["/bin/sh","/usr/share/filebeat/run.sh"]
+CMD ["/bin/bash","/usr/share/filebeat/run.sh"]
