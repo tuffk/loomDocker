@@ -20,13 +20,13 @@ filebeat.config.prospectors:
   reload.period: 3s
 
 output:
-  # logstash:
-  #   hosts: ["${CUSTOMER_NAME}-data.loomsystems.com:5044"]
-  #   ssl:
-  #     enabled: true
-  #     certificate_authorities: /usr/share/loom/loom.pem
-  #     certificate: /usr/share/loom/selfsigned.crt
-  #     key: /usr/share/loom/selfsigned.key
+  logstash:
+    hosts: ["${CUSTOMER_NAME}-data.loomsystems.com:5044"]
+    ssl:
+      enabled: true
+      certificate_authorities: /usr/share/loom/loom.pem
+      certificate: /usr/share/loom/selfsigned.crt
+      key: /usr/share/loom/selfsigned.key
   console:
     pretty: true
   # file:

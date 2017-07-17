@@ -13,12 +13,13 @@ ENV EXCLUDE=[] \
 ### Regardless, make sure this is the last step, because the config file will change more frequently than the certificate
 
 # add the filebeat yml to the container
-COPY ./filebeat.yml /usr/share/filebeat/filebeat.yml
+# COPY ./filebeat.yml /usr/share/filebeat/filebeat.yml
 COPY  ./jsoner.py jsoner.py
 
 USER root
 #get loom certificate
 RUN mkdir /usr/share/loom \
+  && echo "python jsoner.py" >> run.sh \
   && echo "filebeat -e &" >> run.sh \
   && echo "while true" >> run.sh \
   && echo "do" >> run.sh \
