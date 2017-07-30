@@ -7,6 +7,8 @@ This container uses [Filebeat docker](https://www.elastic.co/guide/en/beats/file
 <!-- ```shell
 docker build -t <name> .
 ``` -->
+This container when run will mount the host's docker container folder as read only. The mounted directory allows the monitor to have live feed on the log files of other Dockers on the same host machine.
+
 ```shell
 docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged -v /var/lib/docker/containers:/containers:ro <name>
 ```
@@ -21,5 +23,5 @@ docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged 
 * `IGNORE_OLDER` - [ignore older](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#ignore-older "ignore older")  Default is 0
 * `ENCODING` - [encoding](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_encoding "encoding") Default is 'plain'
 
-### Docker version 
+### Docker version
 The minimum docker version supported is 17.0
