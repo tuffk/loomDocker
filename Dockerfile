@@ -26,4 +26,4 @@ RUN mkdir /usr/share/loom \
   && rm selfsigned.csr \
   && yum remove -y openssl
 
-CMD ["/bin/sh","/usr/share/filebeat/run.sh"]
+CMD ["/bin/bash","/usr/share/filebeat/run.sh"]
