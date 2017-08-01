@@ -9,6 +9,8 @@ docker build -t <name> .
 ``` -->
 This container when run will mount the host's docker container folder as read only. The mounted directory allows the monitor to have live feed on the log files of other Dockers on the same host machine.
 
+Why not use `/var/run/docker.sock`? As we only need to monitor on the logs mounting the volume as `READ ONLY` keeps the host machine and the docker daemon safe.
+
 ```shell
 docker run --name loom-collector-docker -e CUSTOMER_NAME=<customer name> --privileged -v /var/lib/docker/containers:/containers:ro loomsystems/loom-collector-docker
 ```
