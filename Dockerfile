@@ -11,17 +11,11 @@ ENV EXCLUDE=[] \
 
 # add the script that generates the filebeat.yml dyanmically to the docker
 COPY  ./jsoner.py jsoner.py
+COPY ./run.sh run.sh
 
 USER root
 #get loom certificate & create init script
 RUN mkdir /usr/share/loom \
-  && echo "python jsoner.py" >> run.sh \
-  && echo "filebeat -e &" >> run.sh \
-  && echo "while true" >> run.sh \
-  && echo "do" >> run.sh \
-  && echo "python jsoner.py" >> run.sh \
-  && echo "sleep 5" >> run.sh \
-  && echo "done" >> run.sh \
   && curl -o /usr/share/loom/loom.pem https://static.loomsystems.com/loom.cer \
   && chmod 755 /usr/share/loom/loom.pem \
   && yum install -y openssl \
@@ -32,4 +26,4 @@ RUN mkdir /usr/share/loom \
   && rm selfsigned.csr \
   && yum remove -y openssl
 
-CMD ["/bin/bash","/usr/share/filebeat/run.sh"]
+CMD ["/bin/sh","/usr/share/filebeat/run.sh"]
