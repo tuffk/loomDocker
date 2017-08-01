@@ -10,7 +10,7 @@ docker build -t <name> .
 This container when run will mount the host's docker container folder as read only. The mounted directory allows the monitor to have live feed on the log files of other Dockers on the same host machine.
 
 ```shell
-docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged -v /var/lib/docker/containers:/containers:ro <name>
+docker run --name loom-collector-docker -e CUSTOMER_NAME=<customer name> --privileged -v /var/lib/docker/containers:/containers:ro loomsystems/loom-collector-docker
 ```
 * `-v /var/lib/docker/containers:/containers:ro` this allows the docker to read the other containers logs. The host directory must be where all the docker containers are stored (normally /var/lib/docker/containers for Linux).
 * `CUSTOMER_NAME` must be set for the container to send the logs to Loom.
