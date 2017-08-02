@@ -24,6 +24,3 @@ docker run --name loom-collector-docker -e CUSTOMER_NAME=<customer name> --privi
 * `TAGS` - [tags](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_tags "tags") Default is none
 * `IGNORE_OLDER` - [ignore older](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#ignore-older "ignore older")  Default is 0
 * `ENCODING` - [encoding](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_encoding "encoding") Default is 'plain'
-
-### Docker version
-The minimum docker version supported is 17.0
