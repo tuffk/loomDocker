@@ -1,6 +1,6 @@
 import sys, json, os
-kuz = open("/usr/share/filebeat/filebeat.yml","w")
-kuz.write("filebeat.prospectors:\n")
+conf_file = open("/usr/share/filebeat/filebeat.yml","w")
+conf_file.write("filebeat.prospectors:\n")
 PATH = "/containers"
 # PATH = "/var/lib/docker/containers"
 files = os.listdir(PATH)
@@ -9,10 +9,10 @@ for f in files:
     json_file = open(PATH+"/"+f+"/config.v2.json")
     temp = json.load(json_file)
     json_file.close()
-    kuz.write("- input_type: log\n")
-    kuz.write("  paths:\n")
-    kuz.write("    - "+PATH+"/"+f+"/*.log\n")
-    kuz.write("  include_lines: ${INCLUDE}\n\
+    conf_file.write("- input_type: log\n")
+    conf_file.write("  paths:\n")
+    conf_file.write("    - "+PATH+"/"+f+"/*.log\n")
+    conf_file.write("  include_lines: ${INCLUDE}\n\
   exclude_lines: ${EXCLUDE}\n\
   exclude_files: ${EXCLUDE_FILES}\n\
   tags: ${TAGS}\n\
@@ -23,12 +23,12 @@ for f in files:
     add_error_key: true\n\
     message_key: log\n\
   tail_files: true\n")
-    kuz.write("  fields:\n")
-    kuz.write("    name: "+temp["Name"]+"\n")
-    kuz.write("    image: "+temp["Config"]["Image"]+"\n")
-    kuz.write("    hostname: "+temp["Config"]["Hostname"]+"\n")
-    kuz.write("    ID: "+temp["ID"]+"\n\n")
-kuz.write("\n\
+    conf_file.write("  fields:\n")
+    conf_file.write("    name: "+temp["Name"]+"\n")
+    conf_file.write("    image: "+temp["Config"]["Image"]+"\n")
+    conf_file.write("    hostname: "+temp["Config"]["Hostname"]+"\n")
+    conf_file.write("    ID: "+temp["ID"]+"\n\n")
+conf_file.write("\n\
 filebeat.config.prospectors:\n\
   path: /usr/share/filebeat/filebeat.yml\n\
   reload.enabled: true\n\
@@ -44,6 +44,4 @@ output:\n\
       key: /usr/share/loom/selfsigned.key\n\
   console:\n\
     pretty: true\n")
-kuz.close()
-
-#/var/lib/docker/containers/59ad9fbbc017d15cd8a6943969cc455aa3ceabb183d772369e4eaff819bd7471/config.v2.json
+conf_file.close()

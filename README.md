@@ -7,8 +7,12 @@ This container uses [Filebeat docker](https://www.elastic.co/guide/en/beats/file
 <!-- ```shell
 docker build -t <name> .
 ``` -->
+This container when run will mount the host's docker container folder as read only. The mounted directory allows the monitor to have live feed on the log files of other Dockers on the same host machine.
+
+Why not use `/var/run/docker.sock`? As we only need to monitor on the logs mounting the volume as `READ ONLY` keeps the host machine and the docker daemon safe.
+
 ```shell
-docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged -v /var/lib/docker/containers:/containers:ro <name>
+docker run --name loom-collector-docker -e CUSTOMER_NAME=<customer name> --privileged -v /var/lib/docker/containers:/containers:ro loomsystems/loom-collector-docker
 ```
 * `-v /var/lib/docker/containers:/containers:ro` this allows the docker to read the other containers logs. The host directory must be where all the docker containers are stored (normally /var/lib/docker/containers for Linux).
 * `CUSTOMER_NAME` must be set for the container to send the logs to Loom.
@@ -20,6 +24,3 @@ docker run --name <name> -e CUSTOMER_NAME=<customer name> [-e ...] --privileged 
 * `TAGS` - [tags](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_tags "tags") Default is none
 * `IGNORE_OLDER` - [ignore older](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#ignore-older "ignore older")  Default is 0
 * `ENCODING` - [encoding](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_encoding "encoding") Default is 'plain'
-
-### Docker version 
-The minimum docker version supported is 17.0
